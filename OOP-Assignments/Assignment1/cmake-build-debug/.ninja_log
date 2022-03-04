@@ -1,0 +1,5 @@
+# ninja log v5
+0	216	1646059432934426046	CMakeFiles/Assignment1.dir/main.cpp.o	23114d7b71f05e63
+1	222	1646059432942425351	CMakeFiles/Assignment1.dir/User.cpp.o	3a27a7ce19493265
+0	227	1646059432946425003	CMakeFiles/Assignment1.dir/Book.cpp.o	38bd95b14b54f160
+227	275	1646059432994420831	Assignment1	e0f84559fc7264ab
