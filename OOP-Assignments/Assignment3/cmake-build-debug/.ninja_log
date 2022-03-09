@@ -1,0 +1,20 @@
+# ninja log v5
+1	1123	1646436670932616293	CMakeFiles/Assignment3.dir/AssignmentTemplate.cpp.o	70fc9af53b2dea2f
+1	1170	1646436670980615870	CMakeFiles/Assignment3.dir/main.cpp.o	c39ec201bcc109a7
+1	1368	1646436682132518119	CMakeFiles/Assignment3.dir/AssignmentTemplate.cpp.o	70fc9af53b2dea2f
+1368	1454	1646436682220517352	Assignment3	3b2d4ed82c77eba2
+1	56	1646493948155860999	CMakeFiles/Assignment3.dir/AssignmentTemplate.cpp.o	70fc9af53b2dea2f
+1	964	1646493949063843910	CMakeFiles/Assignment3.dir/main.cpp.o	c39ec201bcc109a7
+964	1021	1646493949119842856	Assignment3	3b2d4ed82c77eba2
+1	1046	1646507175843880270	CMakeFiles/Assignment3.dir/main.cpp.o	c39ec201bcc109a7
+1046	1106	1646507175899880996	Assignment3	3b2d4ed82c77eba2
+1	1005	1646515888378148694	CMakeFiles/Assignment3.dir/main.cpp.o	c39ec201bcc109a7
+1005	1057	1646515888430148216	Assignment3	3b2d4ed82c77eba2
+0	929	1646515978885296920	CMakeFiles/Assignment3.dir/main.cpp.o	c39ec201bcc109a7
+930	975	1646515978933296458	Assignment3	3b2d4ed82c77eba2
+0	873	1646516176737408557	CMakeFiles/Assignment3.dir/main.cpp.o	c39ec201bcc109a7
+873	919	1646516176781408661	Assignment3	3b2d4ed82c77eba2
+0	924	1646516798515722020	CMakeFiles/Assignment3.dir/main.cpp.o	c39ec201bcc109a7
+924	978	1646516798571721678	Assignment3	3b2d4ed82c77eba2
+1	928	1646516863711309999	CMakeFiles/Assignment3.dir/main.cpp.o	c39ec201bcc109a7
+928	981	1646516863763309660	Assignment3	3b2d4ed82c77eba2
