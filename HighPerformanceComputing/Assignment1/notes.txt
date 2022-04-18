@@ -1,0 +1,5 @@
+to compile mpi
+mpicc file.c -o outfile
+
+to run
+mpirun -np number of process ./outfile
