@@ -1,3 +1,0 @@
-E:/Upcoming Assignments/DS_Assignment1/A1_P6_ID1_ID2_ID3/cmake-build-debug/CMakeFiles/A1_P6_ID1_ID2_ID3.dir
-E:/Upcoming Assignments/DS_Assignment1/A1_P6_ID1_ID2_ID3/cmake-build-debug/CMakeFiles/edit_cache.dir
-E:/Upcoming Assignments/DS_Assignment1/A1_P6_ID1_ID2_ID3/cmake-build-debug/CMakeFiles/rebuild_cache.dir
