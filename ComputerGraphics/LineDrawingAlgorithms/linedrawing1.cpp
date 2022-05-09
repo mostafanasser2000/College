@@ -1,6 +1,3 @@
-// Abdalla Fadl Shehata
-// 20190305
-// 03/2022
 #if defined(UNICODE) && !defined(_UNICODE)
 #define _UNICODE
 #elif defined(_UNICODE) && !defined(UNICODE)
