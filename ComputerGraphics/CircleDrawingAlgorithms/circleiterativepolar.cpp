@@ -99,19 +99,19 @@ void Draw8Points(HDC hdc, int xc, int yc, int x, int y, COLORREF color)
     SetPixel(hdc, xc - y, yc - x, color);
 }
 // Function that draw line
-void CirclePolar(HDC hdc, int xc, int yc, int R, COLORREF color)
+void CircleIterativePolar(HDC hdc, int xc, int yc, int R, COLORREF color)
 {
-    int x = R;
-    int y = 0;
-    double theta = 0.0;
+    double x = R, y = 0;
     double dtheta = 1.0 / R;
-    Draw8Points(hdc, xc, yc, x, y, color);
+    double cdtheta = cos(dtheta);
+    double sdtheta = sin(dtheta);
+    Draw8Points(hdc, xc, yc, round1(x), round1(y), color);
     while (x > y)
     {
-        theta += dtheta;
-        x = round(R * cos(theta));
-        y = round(R * sin(theta));
-        Draw8Points(hdc, xc, yc, x, y, color);
+        double x1 = x * cdtheta - y * sdtheta;
+        y = x * sdtheta + y * cdtheta;
+        x = x1;
+        Draw8Points(hdc, xc, yc, round1(x), round1(y), color);
     }
 }
 
@@ -133,7 +133,7 @@ LRESULT CALLBACK WindowProcedure(HWND hwnd, UINT message, WPARAM wParam, LPARAM 
         ye = HIWORD(lParam);
         r = sqrt(((xe - xc) * (xe - xc)) + ((ye - yc) * (ye - yc)));
         R = round1(r);
-        CirclePolar(hdc, xc, yc, R, RGB(0, 0, 0));
+        CircleIterativePolar(hdc, xc, yc, R, RGB(0, 0, 0));
         break;
     case WM_DESTROY:
         PostQuitMessage(0); /* send a WM_QUIT to the message queue */
