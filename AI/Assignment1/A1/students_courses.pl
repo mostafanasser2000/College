@@ -51,6 +51,8 @@ prerequisite('Computer Architecture', 'Microprocessors').
 prerequisite('Data Communication', 'Networks').
 prerequisite('Database', 'Data Warehouses').
 
+% Mostafa Nasser Mohamed 20190537
+% Abdallah Fadl 2019305
 %task1
 member(X,[X|_]).
 member(X,[_|T]) :-
@@ -130,16 +132,8 @@ gradeInWords(Student,Course,GradesInWords) :-
 
 %task5
 
-remainingCourses(StudentNum,CourseName,CoursesList):-
-	remainingCourses(StudentNum,CourseName,CoursesList,[]).
-	
-	
-remainingCourses(StudentNum, CourseName, CoursesList, TempList):-
-	CourseName \= firstCourse,
-	prerequisite(PreCourse,CourseName),
-	(student(StudentNum, PreCourse, Grade), 
-	Grade >= 50 -> remainingCourses(StudentNum,  , CoursesList, TempList);
-	append([PreCourse],TempList, NewList), 
-	remainingCourses(StudentNum, PreCourse, CoursesList, NewList)).
+mainPrerequistite(X,Y) :- prerequisite(X, Y).
+mainPrerequistite(X,Y) :- prerequisite(X, Z),
+                          mainPrerequistite(Z,Y).
+remainingCourses(TargetCourse,List) :- findall(S, mainPrerequistite(S,TargetCourse),List).
 
-remainingCourses(StudentNum, , TempList, TempList).
