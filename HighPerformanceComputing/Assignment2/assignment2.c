@@ -78,8 +78,9 @@ int main(int argc, char *argv[])
         centers[centIndex].y = randy;
         centers[centIndex].cluster = points[centIndex].cluster;
     }
+    int distance[numberOfPoints][THREADS];
     int i;
-#pragma omp parallel num_threads(THREADS) shared(points, centers) private(i)
+#pragma omp parallel num_threads(THREADS) shared(points, centers, distance) private(i)
     {
 
 #pragma omp for schedule(static)
@@ -90,30 +91,42 @@ int main(int argc, char *argv[])
             p.y = centers[0].y;
             p.cluster = 1;
             int j;
-            for (j = 1; j < THREADS; j++)
+
+            for (j = 0; j < THREADS; j++)
             {
-                if (sqrt(pow((points[i].x - centers[j].x), 2) + pow(points[i].y - centers[j].y, 2)) < sqrt(pow(points[i].x - p.x, 2) + pow(points[i].y - p.y, 2)))
+                distance[i][j] = sqrt(pow((points[i].x - centers[j].x), 2) + pow(points[i].y - centers[j].y, 2));
+                // p.x = centers[j].x;
+                // p.y = centers[j].y;
+                // p.cluster = j + 1;
+                // points[i].cluster = j + 1;
+            }
+
+            int MIN = 10000;
+            int cluster_index = 0;
+            for (int j = 0; j < THREADS; j++)
+            {
+                if (distance[i][j] < MIN)
                 {
-                    p.x = centers[j].x;
-                    p.y = centers[j].y;
-                    p.cluster = j + 1;
+                    MIN = distance[i][j];
                     points[i].cluster = j + 1;
                 }
             }
+
             int sumX = 0, sumY = 0, n = 0, k;
             for (k = 0; k < THREADS; k++)
             {
-                if (points[k].cluster == p.cluster)
+                if (points[k].cluster == points[i].cluster)
                 {
                     sumX += points[k].x;
                     sumY += points[k].y;
                     n++;
                 }
             }
-            centers[p.cluster - 1].x = sumX / n;
-            centers[p.cluster - 1].y = sumY / n;
+            centers[points[i].cluster - 1].x = sumX / n;
+            centers[points[i].cluster - 1].y = sumY / n;
         }
-    } /* end of parallel region */
+    }
+    /* end of parallel region */
 
     int m1, m2;
     for (m1 = 1; m1 <= THREADS; m1++)
