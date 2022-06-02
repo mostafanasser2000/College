@@ -73,7 +73,7 @@ int main(int argc, char *argv[])
 
         // calculate the bar size
         range = MAX - MIN;
-        barSize = (range + 1) / numberOfBars;
+        barSize = ceil((range * 1.0) / numberOfBars);
 
         // assign work to slave processes only not master process
         process_count -= 1;
@@ -98,7 +98,7 @@ int main(int argc, char *argv[])
         MPI_Send(&points[index], elements_remaining, MPI_INT, i + 1, 0,
                  MPI_COMM_WORLD);
 
-        // receive the results from all processes
+        // receive frequencies arrays from all processes
         int results[process_count][MAX + 1];
         for (i = 0; i < process_count; i++)
         {
@@ -112,6 +112,7 @@ int main(int argc, char *argv[])
             int higher = barSize * i;
             int lower = barSize * (i - 1) + 1;
             int count = 0;
+            // count the number of elements in the current range
             for (int j = 0; j < process_count; ++j)
             {
                 for (int k = 0; k <= MAX; ++k)
@@ -146,7 +147,7 @@ int main(int argc, char *argv[])
                  0, 0,
                  MPI_COMM_WORLD,
                  &status);
-        int myRanges[MAX + 1];
+        int myRanges[MAX + 1]; // frequency array
 #pragma omp parallel
         {
 #pragma omp for
@@ -157,10 +158,15 @@ int main(int argc, char *argv[])
 #pragma omp for
             for (int i = 0; i < elements_received_per_process; i++)
             {
-                myRanges[myPoints[i]]++;
+
+                // count the number of times every point occurred
+#pragma omp critical
+                {
+                    myRanges[myPoints[i]]++;
+                }
             }
         }
-
+        // send my frequency array
         MPI_Send(&myRanges, MAX + 1, MPI_INT, 0, 0, MPI_COMM_WORLD);
     }
 
